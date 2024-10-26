@@ -1,0 +1,11 @@
+#!/bin/bash
+# Compiling the Python script stored in the environment variable $PYFILE
+echo "Compiling $PYFILE ..."
+python3 -m py_compile "$PYFILE"
+
+# Moving the compiled .pyc file to match the output format (PYFILE.pyc)
+output_file="${PYFILE}c"
+compiled_dir=$(dirname "$PYFILE")
+compiled_file="$compiled_dir/__pycache__/$(basename "$PYFILE" .py).cpython-38.pyc"
+
+mv "$compiled_file" "$output_file"
