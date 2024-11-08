@@ -49,3 +49,13 @@ class Rectangle:
             return (0)
         return (2 * (self.__height + self.__width))
 
+    """ Returns printable string representation
+    of an instance
+    """
+    def __str__(self):
+        empty_string = ""
+
+        if self.__width == 0 or self.__height == 0:
+            return (empty_string)
+
+        return ((('#' * self.width) + "\n") * self.height)[:-1]
