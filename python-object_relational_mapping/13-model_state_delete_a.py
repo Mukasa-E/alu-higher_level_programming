@@ -26,23 +26,14 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    try:
-        # Query and delete State objects containing the letter 'a' in their name (case-insensitive)
-        states_to_delete = session.query(State).filter(State.name.ilike('%a%')).all()
+    # Query and delete State objects containing the letter 'a' in their name (case-insensitive)
+    states_to_delete = session.query(State).filter(State.name.ilike('%a%')).all()
+    
+    for state in states_to_delete:
+        session.delete(state)
 
-        if states_to_delete:
-            for state in states_to_delete:
-                print(f"Deleting state: {state.name}")  # Debug: Check which state is being deleted
-                session.delete(state)
-            # Commit the changes to the database
-            session.commit()
-        else:
-            print("No states with the letter 'a' found for deletion.")  # Debug: No states found
+    # Commit the changes to the database
+    session.commit()
 
-    except Exception as e:
-        print(f"Error: {e}")
-
-    finally:
-        # Close the session
-        session.close()
-
+    # Close the session
+    session.close()
