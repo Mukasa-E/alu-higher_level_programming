@@ -16,15 +16,18 @@ if __name__ == "__main__":
     database = sys.argv[3]
 
     # Create a database connection using SQLAlchemy
-    engine = create_engine(f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}", pool_pre_ping=True)
+    engine = create_engine(
+        f"mysql+mysqldb://{username}:{password}@localhost:3306/{database}",
+        pool_pre_ping=True
+    )
     Base.metadata.create_all(engine)
 
     # Create a session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Query and delete State objects containing the letter 'a' in their name
-    states_to_delete = session.query(State).filter(State.name.like('%a%')).all()
+    # Query and delete State objects containing the letter 'a' in their name (case-insensitive)
+    states_to_delete = session.query(State).filter(State.name.ilike('%a%')).all()
     for state in states_to_delete:
         session.delete(state)
 
@@ -33,3 +36,4 @@ if __name__ == "__main__":
 
     # Close the session
     session.close()
+
