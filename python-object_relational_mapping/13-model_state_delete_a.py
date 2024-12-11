@@ -34,6 +34,8 @@ if __name__ == "__main__":
     states_to_delete = session.query(State).filter(
         State.name.like("%a%")
     )
+    print(f"States to delete (debug): {[state.name for state in states_to_delete]}")  # Debugging
+
     for state in states_to_delete:
         session.delete(state)
 
