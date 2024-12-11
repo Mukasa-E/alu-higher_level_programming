@@ -17,7 +17,9 @@ if __name__ == "__main__":
 
     # Create a database engine
     engine = create_engine(
-        f"mysql+mysqldb://{username}:{password}@localhost:3306/{db_name}",
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+            username, password, db_name
+        ),
         pool_pre_ping=True
     )
 
@@ -29,7 +31,7 @@ if __name__ == "__main__":
     session = Session()
 
     # Query and delete all State objects with a name containing the letter 'a'
-    states_to_delete = session.query(State).filter(State.name.like("%a%")).all()
+    states_to_delete = session.query(State).filter(State.name.like("%a%"))
     for state in states_to_delete:
         session.delete(state)
 
