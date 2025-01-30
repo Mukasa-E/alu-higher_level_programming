@@ -1,15 +1,12 @@
-#!/usr/bin/node
-
 function add (a, b) {
   console.log(a + b);
 }
 
-// Example usage:
-const num1 = parseInt(process.argv[2], 10);
-const num2 = parseInt(process.argv[3], 10);
+const num1 = parseFloat(process.argv[2]);
+const num2 = parseFloat(process.argv[3]);
 
 if (isNaN(num1) || isNaN(num2)) {
-  console.log('Please provide two valid integers as arguments.');
+  console.log(NaN);
 } else {
   add(num1, num2);
 }
