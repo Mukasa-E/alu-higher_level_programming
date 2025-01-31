@@ -5,14 +5,18 @@ const myObject = {
   value: 12
 };
 
+// Log the object before adding the `incr` function
+console.log(myObject);
+
 myObject.incr = function () {
   this.value++;
 };
 
-console.log(myObject);
 myObject.incr();
 console.log(myObject);
+
 myObject.incr();
 console.log(myObject);
+
 myObject.incr();
 console.log(myObject);
