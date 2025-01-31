@@ -5,12 +5,15 @@ function add (a, b) {
   return a + b;
 }
 
+// Parse command-line arguments
 const args = process.argv.slice(2);
 
-if (args.length !== 2 || isNaN(args[0]) || isNaN(args[1])) {
-  console.log('Usage: ./add.js <integer1> <integer2>');
+// Convert arguments to numbers
+const num1 = Number(args[0]);
+const num2 = Number(args[1]);
+
+if (isNaN(num1) || isNaN(num2)) {
+  console.log('NaN');
 } else {
-  const num1 = parseInt(args[0], 10);
-  const num2 = parseInt(args[1], 10);
   console.log(add(num1, num2));
 }
