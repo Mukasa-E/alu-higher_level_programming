@@ -1,12 +1,16 @@
+#!/usr/bin/node
+
+// Function to add two integers
 function add (a, b) {
-  console.log(a + b);
+  return a + b;
 }
 
-const num1 = parseFloat(process.argv[2]);
-const num2 = parseFloat(process.argv[3]);
+const args = process.argv.slice(2);
 
-if (isNaN(num1) || isNaN(num2)) {
-  console.log(NaN);
+if (args.length !== 2 || isNaN(args[0]) || isNaN(args[1])) {
+  console.log('Usage: ./add.js <integer1> <integer2>');
 } else {
-  add(num1, num2);
+  const num1 = parseInt(args[0], 10);
+  const num2 = parseInt(args[1], 10);
+  console.log(add(num1, num2));
 }
